@@ -1,4 +1,4 @@
-package com.myalley.thymeleaf3;
+package com.myalley.thymeleaf3.KATA;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -44,28 +44,23 @@ public class AnagramTest {
     private Map<String, String> getSelectedWord(String[] wordArray, List<String> anagramList) {
         Map<String, String> anagramWord = new HashMap<>();
 
-        for (String word1 : anagramList) {
+        System.out.println(anagramList.size());
+
+        for (int a = 0; a < anagramList.size(); a++) {
+            String word1 = anagramList.get(a);
             String[] anagramWord1 = word1.split("");
 
-            anagramList.forEach(word2 -> {
-                if ((word1 + word2).length() != 11) {
-                    return;
-                }
+            for(String word2: anagramList) {
                 // anagramWord2 선택
                 String[] anagramWord2 = word2.split("");
                 // anagramWord1 + anagramWord2 = wordArray
                 String[] sumWord = Stream.concat(Arrays.stream(anagramWord1), Arrays.stream(anagramWord2)).toArray(String[]::new);
                 Arrays.sort(sumWord);
 
-                if (!Objects.equals(sumWord[0], "c")) {
-                    return;
-                }
-
                 if (Arrays.equals(wordArray, sumWord)) {
                     anagramWord.put(word1, word2);
                 }
-
-            });
+            }
         }
         return anagramWord;
     }
@@ -82,14 +77,4 @@ public class AnagramTest {
         System.out.println(anagramWord);
     }
 
-    @Test
-    public void TTT() {
-        int[] a = {1, 4, 2};
-        int[] b = {1, 2, 4};
-        Arrays.sort(a);
-        Arrays.sort(b);
-        if (Arrays.equals(a, b)) {
-            System.out.println("ok");
-        }
-    }
 }
