@@ -2,10 +2,10 @@ package com.myalley.thymeleaf3.domain.tdd;
 
 import java.util.Objects;
 
-public class Money {
+public class Money implements Expression{
 
-    private final int amount;
-    private final String currency;
+    final int amount;
+    final String currency;
 
     public Money(int amount, String currency) {
         this.amount = amount;
@@ -22,6 +22,11 @@ public class Money {
 
     public Money times(int multi) {
         return new Money(amount * multi, currency);
+    }
+
+    @Override
+    public Money reduce(String to) {
+        return this;
     }
 
     @Override
@@ -44,5 +49,9 @@ public class Money {
                 "amount=" + amount +
                 ", currency='" + currency + '\'' +
                 '}';
+    }
+
+    public Expression plus(Money addend) {
+        return new Sum(this, addend);
     }
 }
