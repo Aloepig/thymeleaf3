@@ -15,7 +15,7 @@ public class AnagramTest {
     private List<String> getAnagramList() {
         FileReader fileReader;
         try {
-            fileReader = new FileReader(System.getProperty("user.dir") + "/src/main/resources/word_list.txt");
+            fileReader = new FileReader(System.getProperty("user.dir") + "/src/main/resources/kata/word_list.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

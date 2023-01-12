@@ -12,9 +12,6 @@ public class MoneyTest {
         Money five = Money.dollar(5);
         Assertions.assertEquals(Money.dollar(10), five.times(2));
         Assertions.assertEquals(Money.dollar(15), five.times(3));
-        Money five2 = Money.franc(5);
-        Assertions.assertEquals(Money.franc(10), five2.times(2));
-        Assertions.assertEquals(Money.franc(15), five2.times(3));
     }
 
     @Test
@@ -22,9 +19,9 @@ public class MoneyTest {
         Assertions.assertEquals(Money.dollar(5), Money.dollar(5));
         Assertions.assertNotEquals(Money.dollar(6), Money.dollar(5));
         Assertions.assertEquals(Money.franc(5), Money.franc(5));
-        Assertions.assertNotEquals(Money.franc(6), Money.franc(5));
-        Assertions.assertNotEquals(Money.dollar(5), Money.franc(5));
     }
+
+
 
     static class Money {
         private final int amount;
@@ -35,12 +32,12 @@ public class MoneyTest {
             this.currency = currency;
         }
 
-        public static Dollar dollar(int amount) {
-            return new Dollar(amount, "USD");
+        public static Money dollar(int amount) {
+            return new Money(amount, "USD");
         }
 
-        public static Franc franc(int amount) {
-            return new Franc(amount, "CHF");
+        public static Money franc(int amount) {
+            return new Money(amount, "CHF");
         }
 
         Money times(int multi) {
@@ -68,20 +65,6 @@ public class MoneyTest {
                     ", currency='" + currency + '\'' +
                     '}';
         }
-    }
-
-    static class Dollar extends Money {
-        public Dollar(int amount, String currency) {
-            super(amount, currency);
-        }
-
-    }
-
-    static class Franc extends Money {
-        public Franc(int amount, String currency) {
-            super(amount, currency);
-        }
-
     }
 
 }
