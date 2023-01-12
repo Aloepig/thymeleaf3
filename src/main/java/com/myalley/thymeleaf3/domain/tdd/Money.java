@@ -2,7 +2,7 @@ package com.myalley.thymeleaf3.domain.tdd;
 
 import java.util.Objects;
 
-public class Money implements Expression{
+public class Money implements Expression {
 
     final int amount;
     final String currency;
@@ -25,8 +25,9 @@ public class Money implements Expression{
     }
 
     @Override
-    public Money reduce(String to) {
-        return this;
+    public Money reduce(String to, Bank bank) {
+        int rate = bank.rate(currency, to);
+        return new Money(amount/rate, to);
     }
 
     @Override
