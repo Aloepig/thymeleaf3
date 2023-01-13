@@ -1,6 +1,8 @@
 package com.myalley.thymeleaf3.KATA;
 
+import com.myalley.thymeleaf3.kata.anagram.Anagram;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -11,6 +13,13 @@ import java.util.stream.Stream;
 
 // Code Kata 1번
 public class AnagramTest {
+
+    static Anagram anagram;
+
+    @BeforeAll
+    static public void 파일읽기() {
+        anagram = new Anagram("/src/main/resources/kata/word_list.txt", "documenting");
+    }
 
     private List<String> getAnagramList() {
         FileReader fileReader;
@@ -50,7 +59,7 @@ public class AnagramTest {
             String word1 = anagramList.get(a);
             String[] anagramWord1 = word1.split("");
 
-            for(String word2: anagramList) {
+            for (String word2 : anagramList) {
                 // anagramWord2 선택
                 String[] anagramWord2 = word2.split("");
                 // anagramWord1 + anagramWord2 = wordArray
@@ -75,6 +84,26 @@ public class AnagramTest {
         Map<String, String> anagramWord = getSelectedWord(wordArray, anagramList);
 
         System.out.println(anagramWord);
+    }
+
+    @Test
+    public void 파일읽기확인() {
+        Assertions.assertNotNull(anagram.words);
+        Assertions.assertEquals(1633, anagram.words.size());
+    }
+
+    @Test
+    public void 소스단어정렬() {
+        Assertions.assertEquals("cdegimnnotu", anagram.sortedSourceText);
+    }
+
+    @Test
+    public void 일치하는단어목록() {
+        List<String> words = new ArrayList<>();
+        words.add("cdegi");
+        words.add("mnnotu");
+
+//        Assertions.assertEquals("cdegimnnotu", Anagram.run(words));
     }
 
 }
